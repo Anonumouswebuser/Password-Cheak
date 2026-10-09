@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080c17">
+  <meta name="description" content="A private, local-first password strength checker and secure password generator.">
+  <title>Password Strength Checker — Local Security Analysis</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#analyzer">Skip to password analyzer</a>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Password Strength Checker home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12a2 2 0 0 1 2 2v8H4v-8a2 2 0 0 1 2-2Zm6 4v2"/></svg></span>
+      <span>Password<span class="brand-light">Check</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#analyzer">Analyzer</a><a href="#generator">Generator</a><a href="#about">About</a>
+    </nav>
+    <div class="privacy-pill"><span class="status-dot"></span> 100% local analysis</div>
+  </header>
+
+  <main id="home">
+    <section class="hero page-wrap" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> PERSONAL SECURITY, MADE CLEAR</div>
+        <h1 id="page-title">Know your password’s<br><span>strength.</span></h1>
+        <p>Get an instant security readout, understand what makes a password resilient, and create a stronger one — all without leaving your browser.</p>
+        <div class="hero-note"><span aria-hidden="true">◈</span> Your password is analyzed locally in your browser and is never stored or transmitted.</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-lock"><svg viewBox="0 0 64 64"><path d="M19 28v-9a13 13 0 0 1 26 0v9M16 28h32a4 4 0 0 1 4 4v23H12V32a4 4 0 0 1 4-4Zm16 11v7"/></svg><span></span></div>
+        <div class="art-label art-top">LOCAL ANALYSIS <i></i></div><div class="art-label art-bottom"><b>01</b> PRIVATE BY DESIGN</div>
+      </div>
+    </section>
+
+    <section class="dashboard page-wrap" id="analyzer" aria-labelledby="analyzer-title">
+      <div class="section-heading"><div><div class="eyebrow">PASSWORD ANALYZER</div><h2 id="analyzer-title">Your security overview</h2></div><span class="live-indicator"><i></i> LIVE ANALYSIS</span></div>
+      <div class="dashboard-grid">
+        <article class="card analyzer-card">
+          <div class="card-topline"><div class="icon-tile"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12a2 2 0 0 1 2 2v8H4v-8a2 2 0 0 1 2-2Zm6 4v2"/></svg></div><div><h3>Password security analyzer</h3><p>Enter a password to see how it holds up.</p></div></div>
+          <label for="password-input" class="field-label">Password</label>
+          <div class="password-field"><input id="password-input" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" aria-describedby="privacy-hint input-message" placeholder="Type a password to analyze" maxlength="256"><button class="field-action" id="toggle-visibility" type="button" aria-label="Show password" title="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="field-action clear-action" id="clear-password" type="button" aria-label="Clear password" title="Clear password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+          <p class="field-hint" id="privacy-hint"><span aria-hidden="true">◈</span> Analyzed only in this browser. Never stored or transmitted.</p>
+          <p class="input-message" id="input-message" aria-live="polite">Please enter a password to begin analysis.</p>
+          <div class="strength-summary"><div class="strength-label-row"><div><span class="micro-label">STRENGTH RATING</span><strong class="strength-label" id="strength-label">—</strong></div><div class="score-number"><b id="score-value">0</b><span>/ 100</span></div></div><div class="meter-track" role="progressbar" aria-label="Password strength score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="strength-meter"><span id="meter-fill"></span></div><div class="meter-legend"><span>NEEDS WORK</span><span>EXCELLENT</span></div></div>
+          <div class="entropy-row"><div class="entropy-icon">⌁</div><div><span class="micro-label">ESTIMATED ENTROPY</span><strong><span id="entropy-value">0</span> <small>bits</small></strong></div><span class="info-mark" title="An educational estimate of password unpredictability." aria-label="Entropy is an estimate of password unpredictability">i</span></div>
+          <p class="entropy-note">Entropy estimates unpredictability. Real-world security also depends on predictability and whether a password appears in known lists.</p>
+        </article>
+
+        <div class="side-stack">
+          <article class="card detail-card"><div class="card-heading"><div><span class="micro-label">01 / LENGTH</span><h3>Password length</h3></div><span class="mini-symbol">↔</span></div><div class="length-value"><b id="length-value">0</b><span>characters</span></div><div class="length-track"><span id="length-fill"></span></div><p class="detail-status" id="length-status">Aim for at least 12 characters</p></article>
+          <article class="card detail-card"><div class="card-heading"><div><span class="micro-label">02 / COMPOSITION</span><h3>Character mix</h3></div><span class="mini-symbol">◫</span></div><div class="composition-list" id="composition-list"><span class="composition-item missing"><i>−</i> Lowercase</span><span class="composition-item missing"><i>−</i> Uppercase</span><span class="composition-item missing"><i>−</i> Numbers</span><span class="composition-item missing"><i>−</i> Symbols</span></div></article>
+          <article class="card detail-card pattern-card"><div class="card-heading"><div><span class="micro-label">03 / PATTERNS</span><h3>Risk signals</h3></div><span class="mini-symbol">⌘</span></div><div class="signal-list" id="signal-list"><p class="signal-muted">Analysis details appear as you type.</p></div></article>
+        </div>
+      </div>
+      <div class="lower-grid"><article class="card recommendations-card"><div class="card-heading"><div><span class="micro-label">NEXT STEPS</span><h3>Security recommendations</h3></div><span class="recommend-icon">✳</span></div><ul id="recommendations-list"><li>Enter a password to get personalized recommendations.</li></ul></article>
+      <article class="card score-card"><div class="card-heading"><div><span class="micro-label">HOW WE SCORE</span><h3>A transparent score</h3></div><span class="mini-symbol">◎</span></div><p>Length and character variety build your score. Common passwords, repeated characters, and predictable sequences reduce it. No single factor decides the result.</p><a class="text-link" href="#about">Explore how it works <span>→</span></a></article></div>
+    </section>
+
+    <section class="generator-section page-wrap" id="generator" aria-labelledby="generator-title">
+      <div class="section-heading"><div><div class="eyebrow">SECURE PASSWORD GENERATOR</div><h2 id="generator-title">Build a stronger password</h2></div><p>Created with your browser’s cryptographic random number generator.</p></div>
+      <article class="card generator-card">
+        <div class="generator-controls"><div class="control-block length-control"><label for="generator-length">PASSWORD LENGTH <output id="generator-length-output" for="generator-length">16</output></label><input id="generator-length" type="range" min="8" max="64" value="16"><div class="range-ends"><span>8</span><span>64</span></div></div>
+          <fieldset class="category-control"><legend>INCLUDE CHARACTER TYPES</legend><div class="checkboxes"><label class="check-option"><input type="checkbox" id="gen-lower" checked><span class="custom-check">✓</span> Lowercase</label><label class="check-option"><input type="checkbox" id="gen-upper" checked><span class="custom-check">✓</span> Uppercase</label><label class="check-option"><input type="checkbox" id="gen-numbers" checked><span class="custom-check">✓</span> Numbers</label><label class="check-option"><input type="checkbox" id="gen-symbols" checked><span class="custom-check">✓</span> Symbols</label></div></fieldset>
+          <button class="primary-button" id="generate-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Zm6 12 .8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15Z"/></svg> Generate secure password</button>
+        </div>
+        <div class="generator-output"><div class="output-top"><label for="generated-password">GENERATED PASSWORD</label><span class="crypto-label"><i></i> CRYPTOGRAPHICALLY RANDOM</span></div><div class="generated-field"><input id="generated-password" type="password" readonly placeholder="Your password will appear here" aria-label="Generated password"><button id="toggle-generated" class="field-action" type="button" aria-label="Show generated password" title="Show generated password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button><button id="copy-generated" class="copy-button" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg> Copy</button></div><p id="generator-message" class="generator-message" aria-live="polite">Generated passwords stay on this page and are not saved.</p></div>
+      </article>
+    </section>
+
+    <section class="about-section page-wrap" id="about" aria-labelledby="about-title"><div class="section-heading"><div><div class="eyebrow">ABOUT THIS PROJECT</div><h2 id="about-title">Security you can understand</h2></div></div>
+      <div class="about-grid"><article class="card about-card"><span class="about-number">01</span><h3>What is password strength?</h3><p>Password strength describes how resistant a password may be to guessing. Longer, less predictable passwords are generally harder to guess than short or familiar patterns.</p></article><article class="card about-card"><span class="about-number">02</span><h3>Why it matters</h3><p>Weak or reused passwords can increase the risk of account compromise. Use a unique password for every account and consider a reputable password manager.</p></article><article class="card about-card"><span class="about-number">03</span><h3>How this works</h3><p>All checks run locally: character analysis, pattern checks, entropy estimate, scoring, then recommendations. No password is sent to a server.</p></article></div>
+      <article class="card flow-card"><div class="flow-step"><span>01</span><b>Password input</b></div><i>→</i><div class="flow-step"><span>02</span><b>Character analysis</b></div><i>→</i><div class="flow-step"><span>03</span><b>Pattern detection</b></div><i>→</i><div class="flow-step"><span>04</span><b>Entropy estimate</b></div><i>→</i><div class="flow-step"><span>05</span><b>Score & guidance</b></div></article>
+      <aside class="disclaimer"><span aria-hidden="true">ⓘ</span><p>This tool provides an educational estimate of password strength. It does not guarantee protection against real-world attacks. Password security also depends on password uniqueness, reuse, authentication mechanisms, breach exposure, and the security of the service where the password is used.</p></aside>
+    </section>
+  </main>
+  <footer class="site-footer page-wrap"><a class="brand footer-brand" href="#home"><span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12a2 2 0 0 1 2 2v8H4v-8a2 2 0 0 1 2-2Zm6 4v2"/></svg></span><span>Password<span class="brand-light">Check</span></span></a><span>Cybersecurity mini project · Client-side by design</span><a href="#home">Back to top ↑</a></footer>
+</body>
+</html>
